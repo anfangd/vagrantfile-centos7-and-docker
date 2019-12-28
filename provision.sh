@@ -20,3 +20,4 @@ chmod +x /usr/local/bin/docker-compose
 gpasswd -a vagrant docker
 systemctl restart docker
 
+# Install Node.js and npm
