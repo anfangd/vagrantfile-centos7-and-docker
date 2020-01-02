@@ -21,3 +21,10 @@ gpasswd -a vagrant docker
 systemctl restart docker
 
 # Install Node.js and npm
+curl -sL https://rpm.nodesource.com/setup_12.x | sudo bash -
+sudo yum -y install nodejs
+node -v
+npm -v
+
+# Install the heroku cli
+curl https://cli-assets.heroku.com/install.sh | sh
