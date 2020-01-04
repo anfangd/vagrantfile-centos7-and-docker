@@ -19,6 +19,8 @@ mv docker-compose /usr/local/bin/
 chmod +x /usr/local/bin/docker-compose
 gpasswd -a vagrant docker
 systemctl restart docker
+docker -v
+docker-compose -v
 
 # Install Node.js and npm
 curl -sL https://rpm.nodesource.com/setup_12.x | sudo bash -
@@ -27,4 +29,13 @@ node -v
 npm -v
 
 # Install the heroku cli
+export PATH=/usr/local/bin:$PATH
 curl https://cli-assets.heroku.com/install.sh | sh
+heroku -v
+
+# Install aws cli version 2
+# cf. https://docs.aws.amazon.com/ja_jp/cli/latest/userguide/install-cliv2-linux-mac.html
+curl "https://d1vvhvl2y92vvt.cloudfront.net/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+sudo ./aws/install
+aws2 --version

@@ -7,7 +7,8 @@ Vagrant.configure("2") do |config|
   config.vm.network "private_network", ip: "192.168.33.10"
 
   # Synced Folder
-  config.vm.synced_folder "./", "/vagrant", type:"virtualbox", mount_options: ['dmode=777','fmode=777']
+  #config.vm.synced_folder "./", "/vagrant", type:"virtualbox", mount_options: ['dmode=777','fmode=777']
+  config.vm.synced_folder false
 
   # Provisioning Script
   config.vm.provision :shell, :path => "provision.sh"
