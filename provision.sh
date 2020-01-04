@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Install Commands
-yum -y install unzip git vim
+yum -y install unzip git vim httpie
 
 # Disable SELinux
 setenforce 0
