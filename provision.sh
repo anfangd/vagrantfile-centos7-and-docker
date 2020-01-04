@@ -1,7 +1,9 @@
 #!/bin/sh
 
 # Install Commands
-yum -y install unzip git vim httpie
+yum -y install \
+    unzip git vim httpie \
+    "Development Tools" zlib-devel openssl-devel ncurses-devel libffi-devel sqlite-devel.x86_64 readline-devel.x86_64 bzip2-devel.x86_64
 
 # Disable SELinux
 setenforce 0
@@ -39,3 +41,10 @@ curl "https://d1vvhvl2y92vvt.cloudfront.net/awscli-exe-linux-x86_64.zip" -o "aws
 unzip awscliv2.zip
 sudo ./aws/install
 aws2 --version
+
+# Install aws eblic
+# cf. https://github.com/aws/aws-elastic-beanstalk-cli-setup
+git clone https://github.com/aws/aws-elastic-beanstalk-cli-setup.git
+./aws-elastic-beanstalk-cli-setup/scripts/bundled_installer
+echo 'export PATH="/root/.ebcli-virtual-env/executables:$PATH"' >> ~/.bash_profile && source ~/.bash_profile
+echo 'export PATH=/root/.pyenv/versions/3.7.2/bin:$PATH' >> /root/.bash_profile && source /root/.bash_profile
