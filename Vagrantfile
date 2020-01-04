@@ -8,7 +8,7 @@ Vagrant.configure("2") do |config|
 
   # Synced Folder
   #config.vm.synced_folder "./", "/vagrant", type:"virtualbox", mount_options: ['dmode=777','fmode=777']
-  config.vm.synced_folder false
+  config.vm.synced_folder ".", "/vagrant", disabled: true
 
   # Provisioning Script
   config.vm.provision :shell, :path => "provision.sh"
