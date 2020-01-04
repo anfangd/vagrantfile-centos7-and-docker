@@ -2,8 +2,12 @@
 
 # Install Commands
 yum -y install \
-    unzip git vim httpie \
+    unzip vim httpie \
     "Development Tools" zlib-devel openssl-devel ncurses-devel libffi-devel sqlite-devel.x86_64 readline-devel.x86_64 bzip2-devel.x86_64
+yum -y remove git
+yum -y install https://centos7.iuscommunity.org/ius-release.rpm
+yum -y install git2u yum-utils
+yum -y install git2u yum-utils
 
 # Disable SELinux
 setenforce 0
