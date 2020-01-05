@@ -2,12 +2,13 @@
 
 # Install Commands
 yum -y install \
-    unzip vim httpie \
+    unzip vim httpie tree \
     "Development Tools" zlib-devel openssl-devel ncurses-devel libffi-devel sqlite-devel.x86_64 readline-devel.x86_64 bzip2-devel.x86_64
 yum -y remove git
 yum -y install https://centos7.iuscommunity.org/ius-release.rpm
 yum -y install git2u yum-utils
-yum -y install git2u yum-utils
+yum-config-manager --disable ius
+git --version
 
 # Disable SELinux
 setenforce 0
@@ -39,16 +40,33 @@ export PATH=/usr/local/bin:$PATH
 curl https://cli-assets.heroku.com/install.sh | sh
 heroku -v
 
+# Install pyenv and Python
+rm -fR ~/.pyenv
+git clone https://github.com/pyenv/pyenv.git ~/.pyenv
+echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bash_profile
+echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bash_profile
+echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n  eval "$(pyenv init -)"\nfi' >> ~/.bash_profile
+source ~/.bash_profile
+pyenv install 3.7.6
+pyenv global 3.7.6
+python --version
+
+# Install aws cli version 1
+# cf. https://github.com/aws/aws-cli
+pip --version
+pip3 install awscli --upgrade
+aws --version
+
 # Install aws cli version 2
 # cf. https://docs.aws.amazon.com/ja_jp/cli/latest/userguide/install-cliv2-linux-mac.html
-curl "https://d1vvhvl2y92vvt.cloudfront.net/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-unzip awscliv2.zip
-sudo ./aws/install
-aws2 --version
+#curl "https://d1vvhvl2y92vvt.cloudfront.net/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+#unzip awscliv2.zip
+#sudo ./aws/install
+#aws2 --version
 
 # Install aws eblic
 # cf. https://github.com/aws/aws-elastic-beanstalk-cli-setup
-git clone https://github.com/aws/aws-elastic-beanstalk-cli-setup.git
-./aws-elastic-beanstalk-cli-setup/scripts/bundled_installer
-echo 'export PATH="/root/.ebcli-virtual-env/executables:$PATH"' >> ~/.bash_profile && source ~/.bash_profile
-echo 'export PATH=/root/.pyenv/versions/3.7.2/bin:$PATH' >> /root/.bash_profile && source /root/.bash_profile
+su -l vagrant -c "git clone https://github.com/aws/aws-elastic-beanstalk-cli-setup.git"
+su -l vagrant -c "./aws-elastic-beanstalk-cli-setup/scripts/bundled_installer"
+echo 'export PATH="/home/vagrant/.ebcli-virtual-env/executables:$PATH"' >> /home/vagrant/.bash_profile && source /home/vagrant/.bash_profile
+echo 'export PATH=/home/vagrant/.pyenv/versions/3.7.2/bin:$PATH' >> /home/vagrant/.bash_profile && source /home/vagrant/.bash_profile
