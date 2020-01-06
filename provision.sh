@@ -54,8 +54,8 @@ python --version
 # Install aws cli version 1
 # cf. https://github.com/aws/aws-cli
 pip --version
-pip3 install awscli --upgrade
-aws --version
+su -l vagrant -c "pip3 install awscli --upgrade"
+su -l vagrant -c "aws --version"
 
 # Install aws cli version 2
 # cf. https://docs.aws.amazon.com/ja_jp/cli/latest/userguide/install-cliv2-linux-mac.html
